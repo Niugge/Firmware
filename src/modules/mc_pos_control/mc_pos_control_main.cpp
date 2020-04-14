@@ -99,9 +99,6 @@ public:
 
 	bool init();
 
-	/** @see ModuleBase::print_status() */
-	int print_status() override;
-
 private:
 	void Run() override;
 
@@ -492,21 +489,6 @@ MulticopterPositionControl::set_vehicle_states(const float &vel_sp_z)
 	if (PX4_ISFINITE(_local_pos.heading)) {
 		_states.yaw = _local_pos.heading;
 	}
-}
-
-int
-MulticopterPositionControl::print_status()
-{
-	if (_flight_tasks.isAnyTaskActive()) {
-		PX4_INFO("Running, active flight task: %i", _flight_tasks.getActiveTask());
-
-	} else {
-		PX4_INFO("Running, no flight task active");
-	}
-
-	perf_print_counter(_cycle_perf);
-
-	return 0;
 }
 
 void
